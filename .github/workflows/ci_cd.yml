@@ -64,11 +64,14 @@ jobs:
           pip3 install gsutil
 
       - name: Authenticate with GCP
-        run: |
-          echo "${{ secrets.GCP_CREDENTIALS }}" > $HOME/gcp-key.json
-          gcloud auth activate-service-account --key-file=$HOME/gcp-key.json
-          gcloud config set project ${{ vars.GCP_PROJECT_ID }}
+        uses: "google-github-actions/auth@v1"
+        with:
+          credentials_json: "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}"
+
+      - name: Set up Cloud SDK
+        uses: "google-github-actions/setup-gcloud@v1"
 
       - name: Deploy to GCP Bucket using rsync
         run: |
+          gcloud config set project ${{ vars.GCP_PROJECT_ID }}
           gsutil rsync -r ui/dist gs://$${{ vars.UI_BUCKET_NAME }}
