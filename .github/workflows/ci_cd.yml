@@ -71,6 +71,10 @@ jobs:
       - name: Set up Cloud SDK
         uses: "google-github-actions/setup-gcloud@v1"
 
+      - name: Verify bucket name
+        run: |
+          echo "Bucket name: ${{ vars.UI_BUCKET_NAME }}"
+
       - name: Deploy to GCP Bucket using rsync
         run: |
           gcloud config set project ${{ vars.GCP_PROJECT_ID }}
