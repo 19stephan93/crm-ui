@@ -37,8 +37,9 @@ jobs:
 
       - name: Verify build output
         run: |
-          echo "Build output directory 'dist' is missing or empty"
-          exit 1
+          if [ ! -d "ui/dist" ] || [ -z "$(ls -A ui/dist)" ]; then
+            echo "Build output directory 'dist' is missing or empty"
+            exit 1
           fi
 
       - name: Upload build artifacts
