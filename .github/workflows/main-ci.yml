@@ -37,7 +37,7 @@ jobs:
 
       - name: Verify build output
         run: |
-          echo "Build output directory 'ui/dist' is missing or empty"
+          echo "Build output directory 'dist' is missing or empty"
           exit 1
           fi
 
