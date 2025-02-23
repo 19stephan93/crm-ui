@@ -54,6 +54,7 @@ jobs:
           path: ui/dist
 
   deploy-DEV:
+    needs: build
     runs-on: ubuntu-latest
     environment: DEV
     steps:
