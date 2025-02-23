@@ -39,6 +39,7 @@ jobs:
         run: |
           cd ui
           npm run build
+          cd ..
 
       - name: Verify build output
         run: |
