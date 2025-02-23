@@ -82,5 +82,9 @@ jobs:
         with:
           name: build-artifacts-${{ github.sha }}
 
+      - name: inspect
+        run: |
+          ls -alt .
+
       - name: Firebase deploy
         run: firebase deploy --project stefanstan-play-area-40b27
