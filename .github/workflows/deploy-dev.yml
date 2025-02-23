@@ -29,5 +29,5 @@ jobs:
 
       - name: Firebase deploy
         run: |
-          gcloud auth application-default login
+          gcloud auth application-default login --quiet
           firebase deploy --project stefanstan-play-area-40b27
