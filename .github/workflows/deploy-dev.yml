@@ -8,6 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     environment: DEV
     steps:
+      - name: Firebase init
+        uses: w9jds/firebase-action@v13.31.2
+        with:
+          args: init
+        env:
+          PROJECT_ID: stefanstan-play-area-40b27
+          GCP_SA_KEY: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@v13.31.2
         with:
