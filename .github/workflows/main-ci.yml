@@ -84,7 +84,8 @@ jobs:
 
       - name: inspect
         run: |
-          ls -alt .
+          ls -alt ui
+          ls -alt ui/dist
 
       - name: Firebase deploy
         run: firebase deploy --project stefanstan-play-area-40b27
