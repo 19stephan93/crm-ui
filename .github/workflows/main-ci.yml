@@ -61,4 +61,4 @@ jobs:
         uses: "google-github-actions/setup-gcloud@v1"
 
       - name: Firebase deploy
-        run: firebase deploy --project "${{ env.FIREBASE_PROJECT_ID }}"
+        run: firebase deploy --project "${{ vars.FIREBASE_PROJECT_ID }}"
