@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: DEV
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
@@ -24,8 +27,5 @@ jobs:
       - name: Set up Cloud SDK
         uses: "google-github-actions/setup-gcloud@v1"
 
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
       - name: Firebase deploy
-        run: firebase deploy
+        run: firebase deploy --project stefanstan-play-area-40b27
