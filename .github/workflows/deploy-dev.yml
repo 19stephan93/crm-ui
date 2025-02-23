@@ -24,7 +24,8 @@ jobs:
       - name: Set up Cloud SDK
         uses: "google-github-actions/setup-gcloud@v1"
 
-      - name: Firebase init
-        run: firebase init hosting
-        env:
-          CI: true
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Firebase deploy
+        run: firebase deploy
