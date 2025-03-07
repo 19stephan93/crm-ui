@@ -76,6 +76,7 @@
   "TotalClients": "Total clients",
   "SearchFromAList": "Search from a list of",
   "ClientsDots": "clients...",
+  "TransactionsDots": "transactions...",
   "SignInWith": "Sign in with",
   "SignInWithGoogleDescription": "Sign in with your Google account to access the application.",
   "Page": "Page",
@@ -259,5 +260,20 @@
   "BlockedTooltip": "The email was blocked from being delivered, possibly due to spam filters or blacklisting.",
   "UnsubscribedTooltip": "The recipient has opted out or unsubscribed from further emails.",
   "ErrorTooltip": "There was a technical error when attempting to send the email.",
-  "LoadedByProxyTooltip": "The email was opened or tracked through a proxy server (sometimes this happens with privacy settings enabled)"
+  "LoadedByProxyTooltip": "The email was opened or tracked through a proxy server (sometimes this happens with privacy settings enabled)",
+
+  "YouHaveClientsWith": "You have clients with",
+  "documents": "documents",
+  "transactions": "transactions",
+  "and": "and",
+  "whoAreExpired": "who are expired",
+  "whoAreCloseToExpiration": "who are close to expiration",
+  "DisplayDatePicker": "With expiration date?",
+  "ExpirationDate": "Expiration Date",
+  "Document": "Document",
+  "willExpireOn": "will expire on",
+  "hasExpiredOn": "has expired on",
+  "ExpiringDocuments": "Expiring Documents",
+  "ExpiringDate": "Expiring Date",
+  "NonExpiring": "Non Expiring"
 }

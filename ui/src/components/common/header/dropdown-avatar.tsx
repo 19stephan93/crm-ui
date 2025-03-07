@@ -22,7 +22,6 @@ export const HeaderAvatar = () => {
     [selectedOrganization, userDetails]
   );
   const windowDimensions = useWindowDimensions();
-  console.log("userDetails", userDetails);
 
   return windowDimensions.width > 500 ? (
     <div className="flex items-center gap-2 p-2 rounded-md bg-background ">

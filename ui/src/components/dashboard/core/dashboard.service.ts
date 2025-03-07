@@ -63,7 +63,7 @@ export const GetOrganizationLastTransactions = async ({
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   try {
     const response: any = await axios.get(
-      `${REPORTS_URL}${ORGANIZATION_PREFIX}/${organizationId}/last?transactions=${transactions}`,
+      `${REPORTS_URL}${ORGANIZATION_PREFIX}/${organizationId}?numberOfTransactions=${transactions}`,
       {
         headers: {
           Authorization:

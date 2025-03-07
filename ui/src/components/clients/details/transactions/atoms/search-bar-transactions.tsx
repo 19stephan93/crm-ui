@@ -1,18 +1,20 @@
 import { Command, CommandInput } from "@/components/ui/command";
 import { useRecoilState } from "recoil";
-import {
-  searchValueAtom,
-  totalClientsAtom,
-} from "../clients/list/utils/clients.recoil";
 import { useContext, useState } from "react";
-import { Button } from "../ui/button";
 import { X } from "lucide-react";
 import { LanguageContext } from "@/i18n/language-context";
 import useDebounce from "@/lib/hooks/useDebounce";
+import {
+  searchValueTransactionsAtom,
+  totalTransactionsAtom,
+} from "../utils/transactions.recoil";
+import { Button } from "@/components/ui/button";
 
-const SearchBar = () => {
-  const [searchValue, setSearchValue] = useRecoilState(searchValueAtom);
-  const [totalClients] = useRecoilState(totalClientsAtom);
+const SearchBarTransactions = () => {
+  const [searchValue, setSearchValue] = useRecoilState(
+    searchValueTransactionsAtom
+  );
+  const [totalTransactions] = useRecoilState(totalTransactionsAtom);
   const [searchText, setSearchText] = useState<string | null>(null);
   const { dictionary } = useContext(LanguageContext);
 
@@ -38,7 +40,7 @@ const SearchBar = () => {
         <CommandInput
           value={searchText ?? ""}
           onValueChange={(e) => setSearchText(e)}
-          placeholder={`${dictionary.SearchFromAList} ${totalClients} ${dictionary.ClientsDots}`}
+          placeholder={`${dictionary.SearchFromAList} ${totalTransactions} ${dictionary.TransactionsDots}`}
         />
       </Command>
       <Button
@@ -53,4 +55,4 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default SearchBarTransactions;

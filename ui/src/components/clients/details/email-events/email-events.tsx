@@ -116,7 +116,6 @@ export const eventToTooltip = (evnt: EmailEvent["event"], dictionary: any) => {
 
 export const EmailEvents = ({ clientData, clientIsLoading }: any) => {
   const { dictionary } = useContext(LanguageContext);
-  console.log(clientData);
 
   const { data, error, isLoading, loadData } = useAxios({
     fetchFn: GetEmailEvents,
@@ -211,8 +210,6 @@ export const EmailEvent = (props: EmailEvent) => {
   const { dictionary } = useContext(LanguageContext);
   const tooltip = useMemo(() => eventToTooltip(event, dictionary), [event]);
   const label = useMemo(() => eventToLabel(event, dictionary), [event]);
-
-  console.log(event, tooltip, label);
 
   return (
     <TableRow>

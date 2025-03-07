@@ -26,7 +26,7 @@ export const ClientSearch = () => {
             ),
             title: `${dictionary.AddNewClientTitle}`,
             description: `${dictionary.AddNewClientDescription}`,
-            submitTxt: `${dictionary.Submit}`,
+            submitTxt: `${dictionary.AddClient}`,
           }}
         />
       </div>
@@ -36,22 +36,21 @@ export const ClientSearch = () => {
       <div className="w-full">
         <SearchBar />
       </div>
-      <div>
-        <ClientForm
-          initialValues={{}}
-          sheetProps={{
-            trigger: (
-              <Button size={"sm"} variant={"default"} className="flex text-xs">
-                <UserRoundPlus className="h-[1.2rem] w-[1.2rem] mr-2" />
-                {dictionary.AddClient}
-              </Button>
-            ),
-            title: `${dictionary.AddNewClientTitle}`,
-            description: `${dictionary.AddNewClientDescription}`,
-            submitTxt: `${dictionary.Submit}`,
-          }}
-        />
-      </div>
+
+      <ClientForm
+        initialValues={{}}
+        sheetProps={{
+          trigger: (
+            <Button size={"sm"} variant={"default"} className="flex text-xs">
+              <UserRoundPlus className="h-[1.2rem] w-[1.2rem] mr-2" />
+              {dictionary.AddClient}
+            </Button>
+          ),
+          title: `${dictionary.AddNewClientTitle}`,
+          description: `${dictionary.AddNewClientDescription}`,
+          submitTxt: `${dictionary.AddClient}`,
+        }}
+      />
     </div>
   );
 };

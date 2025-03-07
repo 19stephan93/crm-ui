@@ -1,3 +1,4 @@
+import { formatDate } from "date-fns";
 import {
   CLIENTS_URL,
   TRANSACTIONS_PREFIX,
@@ -14,6 +15,7 @@ export const GetTransactions = async ({
   day,
   month,
   year,
+  nameSearchText,
 }: {
   clientId: string;
   page: number;
@@ -22,6 +24,7 @@ export const GetTransactions = async ({
   day: number;
   month: number;
   year: number;
+  nameSearchText: string;
 }): Promise<any | DefaultErrorResult | AxiosResponse<any, any>> => {
   const params = new URLSearchParams({
     page: page.toString(),
@@ -30,6 +33,10 @@ export const GetTransactions = async ({
     month: month.toString(),
     year: year.toString(),
   });
+
+  if (nameSearchText) {
+    params.append("nameSearchText", nameSearchText);
+  }
 
   if (transactionType) {
     params.append("transactionType", transactionType);
@@ -65,11 +72,22 @@ export const AddTransaction = async ({
   payload.append("name", body.name);
   payload.append("amount", body.amount);
   payload.append("transactionType", body.transactionType);
+  if (body.expiryDate) {
+    const splittedDate = body.expiryDate.toISOString().split("T")[0].split("-");
+    const formattedDate = formatDate(
+      new Date(
+        parseInt(splittedDate[0]),
+        parseInt(splittedDate[1]) - 1,
+        parseInt(splittedDate[2])
+      ),
+      "yyyy-MM-dd HH:mm:ss.SSS"
+    );
+    payload.append("expiryDate", formattedDate);
+  }
   files.forEach((file) => {
     payload.append("files", file);
   });
 
-  console.log(payload);
   try {
     const response: any = await axios.post(`${TRANSACTIONS_URL}`, payload, {
       headers: {

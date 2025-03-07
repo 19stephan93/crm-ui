@@ -80,7 +80,7 @@ export const DocumentsListHeader = () => {
               />
             </div>
           }
-          confirmTxt={dictionary.Submit}
+          confirmTxt={dictionary.AddDocuments}
           cancelTxt={dictionary.Cancel}
           onConfirm={handleSubmit}
           isDisabled={!file}

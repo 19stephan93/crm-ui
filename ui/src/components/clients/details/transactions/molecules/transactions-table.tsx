@@ -16,7 +16,11 @@ import {
 } from "@/components/ui/table";
 import { LanguageContext } from "@/i18n/language-context";
 import { FilterableTableHeader } from "../atoms/transaction-table-filterable-header";
-import { filterTransactionTableByAtom } from "@/components/clients/details/transactions/utils/transactions.recoil";
+import {
+  filterTransactionTableByAtom,
+  searchValueTransactionsAtom,
+  totalTransactionsAtom,
+} from "@/components/clients/details/transactions/utils/transactions.recoil";
 import { transactionHeaders } from "../utils/consts";
 import { TransactionObject } from "../utils/types";
 import { TablePagination } from "@/components/common/table/pagination";
@@ -36,6 +40,10 @@ export const TransactionsTable = ({
 
   const [filterBy] = useRecoilState(filterTransactionTableByAtom);
 
+  const [searchValueTransactions] = useRecoilState(searchValueTransactionsAtom);
+
+  const [, setTotalTransactions] = useRecoilState(totalTransactionsAtom);
+
   const [currentPage, setCurrentPage] = useState(0);
 
   const { clientId } = useParams();
@@ -54,13 +62,13 @@ export const TransactionsTable = ({
       day: day,
       month: month,
       year: year,
+      nameSearchText: searchValueTransactions,
     },
-    loadOnMount: true,
   });
 
   useEffect(() => {
     loadData();
-  }, [day, month, year]);
+  }, [day, month, year, searchValueTransactions]);
 
   useEffect(() => {
     setCurrentPage(0);
@@ -77,6 +85,15 @@ export const TransactionsTable = ({
       setShouldRefetch(false);
     }
   }, [shouldRefetch]);
+
+  useEffect(() => {
+    if (isLoading) {
+      setTotalTransactions(0);
+    }
+    if (data) {
+      setTotalTransactions(data.numberOfEntries);
+    }
+  }, [data, isLoading]);
 
   return (
     <>

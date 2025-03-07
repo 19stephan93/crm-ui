@@ -34,7 +34,7 @@ export const FilterableTableHeader = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="ghost"
+          variant="secondary"
           size="sm"
           className="-ml-3 h-8 data-[state=open]:bg-accent"
         >

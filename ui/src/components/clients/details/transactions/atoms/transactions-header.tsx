@@ -14,9 +14,12 @@ import { useRecoilState } from "recoil";
 import {
   fileAtom,
   transactionChangedAtom,
+  transactionExpiryDateAtom,
   transactionTypeSelectAtom,
 } from "@/components/clients/details/transactions/utils/transactions.recoil";
 import { shouldRefetchAtom } from "@/components/clients/list/utils/clients.recoil";
+import SearchBarTransactions from "./search-bar-transactions";
+import useWindowDimensions from "@/lib/hooks/useWindowDimensions";
 
 export const TransactionsHeader = () => {
   const [transactionType, setTransactionType] = useRecoilState(
@@ -24,6 +27,9 @@ export const TransactionsHeader = () => {
   );
   const [, setShouldRefetch] = useRecoilState(shouldRefetchAtom);
   const [file, setFile] = useRecoilState(fileAtom);
+  const [transactionExpiryDate, setTransactionExpiryDate] = useRecoilState(
+    transactionExpiryDateAtom
+  );
 
   const { dictionary } = useContext(LanguageContext);
 
@@ -32,6 +38,8 @@ export const TransactionsHeader = () => {
   const addTransactionForm = useForm();
 
   const [, setTransactionChanged] = useRecoilState(transactionChangedAtom);
+
+  const windowDimensions = useWindowDimensions();
 
   const values = useFormFields({
     connect: addTransactionForm,
@@ -44,6 +52,7 @@ export const TransactionsHeader = () => {
       clientId: clientId,
       body: {
         ...values,
+        expiryDate: transactionExpiryDate,
         transactionType: transactionType,
       },
       files: file,
@@ -65,22 +74,30 @@ export const TransactionsHeader = () => {
       setShouldRefetch(true);
       setTransactionType(null);
       setFile(null);
+      setTransactionExpiryDate(undefined);
     } else if (error) {
       toast({ title: dictionary.GenericError, variant: "destructive" });
     }
   }, [dataCode, error]);
 
   return (
-    <div className="flex gap-4 justify-between items-end">
-      <div className="w-[100%]">
-        <p className="font-medium text-md">{dictionary.Transactions}</p>
-      </div>
-      <div>
+    <div className="flex gap-2  flex-col">
+      <p className="font-medium text-md">{dictionary.Transactions}</p>
+      <div
+        className={`flex gap-2 items-center w-full ${
+          windowDimensions.width > 500 ? "flex-row" : "flex-col"
+        }`}
+      >
+        <div className="w-full">
+          <SearchBarTransactions />
+        </div>
         <Modal
           trigger={
             <Button
               size={"sm"}
-              className="text-xs flex items-center"
+              className={`text-xs flex items-center ${
+                windowDimensions.width > 500 ? "" : "w-full"
+              }`}
               variant={"default"}
             >
               <FilePlus2 className="h-[1.2rem] w-[1.2rem] mr-2" />
@@ -90,7 +107,7 @@ export const TransactionsHeader = () => {
           title={dictionary.AddTransaction}
           description={dictionary.AddTransactionDescription}
           component={<TransactionForm form={addTransactionForm} />}
-          confirmTxt={dictionary.Submit}
+          confirmTxt={dictionary.AddTransaction}
           cancelTxt={dictionary.Cancel}
           onConfirm={handleSubmit}
           isDisabled={!addTransactionForm.isValid || !transactionType || !file}

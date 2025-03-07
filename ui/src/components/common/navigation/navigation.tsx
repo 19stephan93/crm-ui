@@ -96,7 +96,7 @@ const Navigation = () => {
             }`}
           >
             <Button
-              variant="outline"
+              variant="outlineSecondary"
               className={expandedNavBar ? "w-full" : undefined}
               size="icon"
               onClick={toggleNavBar}

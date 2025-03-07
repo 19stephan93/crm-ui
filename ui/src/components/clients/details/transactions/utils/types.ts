@@ -2,6 +2,7 @@ export enum TransactionType {
   INCOME = "INCOME",
   EXPENSE = "EXPENSE",
   RECURRING_EXPENSE = "RECURRING_EXPENSE",
+  RECURRING_INCOME = "RECURRING_INCOME",
 }
 
 export enum FileExtensions {
@@ -21,6 +22,7 @@ export interface TransactionObject {
   amount: number;
   fileNames: string;
   transactionType: string;
+  expiryDate?: Date;
 }
 
 export interface TransactionProps {

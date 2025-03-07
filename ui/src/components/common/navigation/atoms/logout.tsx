@@ -24,7 +24,11 @@ const Logout = () => {
   const { dictionary } = useContext(LanguageContext);
   return (
     <CustomTooltip content={dictionary.Logout}>
-      <Button variant="outline" size="icon" onClick={logoutAndRedirect}>
+      <Button
+        variant="outlineSecondary"
+        size="icon"
+        onClick={logoutAndRedirect}
+      >
         <LogOut className="h-[1.2rem] w-[1.2rem]" />
         <span className="sr-only">Logout</span>
       </Button>

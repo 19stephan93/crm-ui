@@ -92,7 +92,7 @@ export const InitialSettings = () => {
               {dictionary.Reset}
             </Button>
             <Button onClick={handleSubmit} disabled={isLoading}>
-              {isLoading ? <Loader /> : dictionary.Submit}
+              {isLoading ? <Loader /> : dictionary.Save}
             </Button>
           </div>
         </div>

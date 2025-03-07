@@ -3,10 +3,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LanguageContext } from "@/i18n/language-context";
 import { Form, Formiz } from "@formiz/core";
-import { useContext, useEffect } from "react";
+import { SetStateAction, useContext, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import {
   fileAtom,
+  transactionExpiryDateAtom,
   transactionTypeSelectAtom,
 } from "@/components/clients/details/transactions/utils/transactions.recoil";
 import {
@@ -28,15 +29,28 @@ import {
 } from "../utils/consts";
 import { TransactionObject, TransactionType } from "../utils/types";
 import { UploadFiles } from "@/components/common/settings/molecules/upload-image";
+import { CheckboxWithText } from "@/components/common/forms/checkbox-with-text";
+import { DatePicker } from "@/components/common/date-picker";
 
 interface TransactionFormProps {
   form: Form;
   data?: TransactionObject;
+  isEdit?: boolean;
 }
 
-export const TransactionForm = ({ form, data }: TransactionFormProps) => {
+export const TransactionForm = ({
+  form,
+  data,
+  isEdit = false,
+}: TransactionFormProps) => {
   const [files, setFiles] = useRecoilState(fileAtom);
+  const [transactionExpiryDate, setTransactionExpiryDate] = useRecoilState(
+    transactionExpiryDateAtom
+  );
   const [, setTransactionType] = useRecoilState(transactionTypeSelectAtom);
+  const [shouldDisplayDatePicker, setShouldDisplayDatePicker] = useState(
+    data?.expiryDate ? true : false
+  );
 
   const { dictionary } = useContext(LanguageContext);
 
@@ -50,11 +64,13 @@ export const TransactionForm = ({ form, data }: TransactionFormProps) => {
 
   useEffect(() => {
     setFiles(null);
+    setTransactionExpiryDate(undefined);
   }, []);
 
   useEffect(() => {
     form.setValues({
       ...data,
+      expiryDate: data?.expiryDate,
       transactionType: data?.transactionType,
     });
   }, [data]);
@@ -107,6 +123,27 @@ export const TransactionForm = ({ form, data }: TransactionFormProps) => {
           </SelectContent>
         </Select>
       </div>
+      {!isEdit && (
+        <>
+          <div className="col-span-4 w-full">
+            <CheckboxWithText
+              checked={shouldDisplayDatePicker}
+              onCheckedChange={setShouldDisplayDatePicker}
+              label={dictionary.DisplayDatePicker}
+            />
+          </div>
+          {shouldDisplayDatePicker && (
+            <div className="col-span-4 w-full">
+              <DatePicker
+                date={transactionExpiryDate}
+                setDate={setTransactionExpiryDate}
+                dateFormat="dd MMM yyyy"
+                full={true}
+              />
+            </div>
+          )}
+        </>
+      )}
 
       {/* TODO Add validation to this filed */}
       {!data && (

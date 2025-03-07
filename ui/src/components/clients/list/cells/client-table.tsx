@@ -27,6 +27,7 @@ import { CellWithHelper } from "../atoms/cell-with-helper";
 import { useNavigate } from "react-router-dom";
 import { CLIENTS_PREFIX } from "@/lib/axios/consts";
 import { TablePagination } from "@/components/common/table/pagination";
+import { ClientExpiringIcon } from "../atoms/client-expiring";
 
 interface ClientTableProps {
   data: any;
@@ -54,7 +55,7 @@ export const ClientTable = ({
   const { dictionary } = useContext(LanguageContext);
 
   const ClientTableHeaders = [
-    { id: "name", label: dictionary.Name, size: 10 },
+    { id: "name", label: dictionary.Name, size: 20 },
     { id: "address", label: dictionary.Address, size: 20 },
     { id: "phone", label: dictionary.Phone, size: 10 },
     { id: "email", label: dictionary.Email, size: 10 },
@@ -62,7 +63,7 @@ export const ClientTable = ({
       id: "type",
       label: dictionary.Type,
       component: <FilterableTableHeader />,
-      size: 15,
+      size: 10,
     },
     {
       id: "createdBy",
@@ -167,7 +168,12 @@ export const ClientTable = ({
                 onClick={() => navigate(`${CLIENTS_PREFIX}/${client.id}`)}
                 className="cursor-pointer"
               >
-                <TableCell>{client.name}</TableCell>
+                <TableCell>
+                  <div className="flex gap-2 items-center">
+                    <ClientExpiringIcon expiringDocs={client.expiringDocs} />
+                    {client.name}
+                  </div>
+                </TableCell>
                 <TableCell>{client.address}</TableCell>
                 <TableCell>{client.telephone}</TableCell>
                 <TableCell>{client.email}</TableCell>

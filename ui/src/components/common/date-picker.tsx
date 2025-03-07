@@ -19,21 +19,25 @@ interface DatePickerProps {
   date: Date | undefined;
   setDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
   dateFormat?: string;
+  full?: boolean;
 }
 
 export const DatePicker = ({
   date,
   setDate,
   dateFormat = "MMM yyyy",
+  full = false,
 }: DatePickerProps) => {
   const { dictionary } = useContext(LanguageContext);
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button
-          variant={"outline"}
+          variant={"outlineSecondary"}
           className={cn(
-            "w-[200px] md:w-[280px] justify-start text-left font-normal border-input",
+            `${
+              full ? "w-full" : "w-[200px] md:w-[280px]"
+            } justify-start text-left font-normal border-input`,
             !date && "text-muted-foreground"
           )}
         >

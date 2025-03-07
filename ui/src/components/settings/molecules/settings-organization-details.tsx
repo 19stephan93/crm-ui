@@ -137,7 +137,10 @@ export const SettingsOrganizationDetails = () => {
             />
             <div className="col-span-4 w-full pb-5">
               <Select
-                onValueChange={(e: any) => setSelectedCurrency(e)}
+                onValueChange={(e: any) => {
+                  setSelectedCurrency(e);
+                  settingsForm.setValues({ currency: e });
+                }}
                 value={selectedCurrency as SelectCurrencyOptions}
                 disabled={isReadonly}
               >
@@ -180,9 +183,9 @@ export const SettingsOrganizationDetails = () => {
                 <Button
                   className="text-xs"
                   onClick={() => handleUpdate()}
-                  disabled={updatedIsLoading || settingsForm.isPristine}
+                  disabled={updatedIsLoading}
                 >
-                  {updatedIsLoading ? <Loader /> : dictionary.Submit}
+                  {updatedIsLoading ? <Loader /> : dictionary.Save}
                 </Button>
               </>
             )}

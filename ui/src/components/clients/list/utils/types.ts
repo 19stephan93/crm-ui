@@ -1,3 +1,7 @@
+export type ExpiringDoc = {
+  name: string;
+  expiryDate: Date;
+};
 export interface Client {
   id: number;
   name: string;
@@ -6,6 +10,7 @@ export interface Client {
   email: string;
   type: string;
   actions: any;
+  expiringDocs?: ExpiringDoc;
 }
 
 export interface InfoCardType {

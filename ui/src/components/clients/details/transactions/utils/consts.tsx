@@ -11,9 +11,10 @@ export const transactionHeaders = (
   return [
     { id: "icon", label: dictionary.FileType, size: 10 },
     { id: "name", label: dictionary.Name, size: 20 },
-    hasAmount ? { id: "amount", label: dictionary.Amount, size: 15 } : {},
-    { id: "transactionType", component: component, size: 20 },
-    { id: "fileName", label: dictionary.FileName, size: 15 },
+    hasAmount ? { id: "amount", label: dictionary.Amount, size: 10 } : {},
+    { id: "transactionType", component: component, size: 10 },
+    { id: "expiryDate", label: dictionary.ExpiringDate, size: 20 },
+    { id: "fileName", label: dictionary.FileName, size: 10 },
     { id: "actions", label: dictionary.Actions, alignRight: true, size: 20 },
   ];
 };

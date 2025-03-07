@@ -3,7 +3,7 @@
 import { Checkbox } from "@/components/ui/checkbox";
 
 interface CheckboxWithTextProps {
-  name: string;
+  name?: string;
   label: string;
   sublabel?: string;
   checked: boolean;

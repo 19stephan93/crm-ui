@@ -27,7 +27,11 @@ export default function LanguageSelector() {
 
   return (
     <CustomTooltip content={dictionary.Language}>
-      <Button onClick={handleLanguageChange} variant="outline" size="icon">
+      <Button
+        onClick={handleLanguageChange}
+        variant="outlineSecondary"
+        size="icon"
+      >
         {valueToLabelLanguageShort(currentLanguage)}
       </Button>
     </CustomTooltip>

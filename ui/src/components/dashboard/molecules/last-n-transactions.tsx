@@ -90,8 +90,8 @@ export const LastNTransactions = () => {
           )}
           {!isLoading &&
             data &&
-            data.length > 0 &&
-            data.map((transaction: TransactionObject) => (
+            data.lastNTransactions.length > 0 &&
+            data.lastNTransactions.map((transaction: TransactionObject) => (
               <Transaction key={transaction.id} transaction={transaction} />
             ))}
         </TableBody>

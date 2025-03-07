@@ -13,6 +13,7 @@ import {
   searchValueAtom,
   totalPagesAtom,
 } from "./utils/clients.recoil";
+import useWindowDimensions from "@/lib/hooks/useWindowDimensions";
 
 const Clients = () => {
   const [, setFilterBy] = useRecoilState(filterTableByAtom);
@@ -20,6 +21,7 @@ const Clients = () => {
   const [, setCurrentPage] = useRecoilState(currentPageAtom);
   const [, setTotalPages] = useRecoilState(totalPagesAtom);
   const { dictionary } = useContext(LanguageContext);
+  const windowDimensions = useWindowDimensions();
 
   const handleResetFilters = () => {
     setFilterBy(null);
@@ -53,14 +55,24 @@ const Clients = () => {
           <Tabs
             onValueChange={handleResetsOnTabChange}
             defaultValue="active"
-            className="w-full flex flex-col"
+            className="w-full flex flex-col mt-4"
           >
-            <div>
-              <TabsList className="m-4 justify-start">
-                <TabsTrigger value="active">
+            <div
+              className={`flex justify-between pr-4 pl-4 ${
+                windowDimensions.width < 500
+                  ? "flex-col"
+                  : "flex-row items-center"
+              } gap-2`}
+            >
+              <TabsList
+                className={`justify-start ${
+                  windowDimensions.width < 500 ? "w-full" : ""
+                }`}
+              >
+                <TabsTrigger value="active" className="w-full">
                   {dictionary.ActiveClients}
                 </TabsTrigger>
-                <TabsTrigger value="archived">
+                <TabsTrigger value="archived" className="w-full">
                   {dictionary.ArchivedClients}
                 </TabsTrigger>
               </TabsList>

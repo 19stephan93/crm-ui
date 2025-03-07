@@ -4,6 +4,7 @@ import { LanguageContext } from "@/i18n/language-context";
 import { useContext } from "react";
 import { getIcon, valueToLabelTabelTransactionType } from "../utils/consts";
 import { TransactionProps } from "../utils/types";
+import { formatDateCustom } from "@/components/clients/list/atoms/client-expiring";
 
 export const Transaction = ({ transaction }: TransactionProps) => {
   const { dictionary } = useContext(LanguageContext);
@@ -17,6 +18,11 @@ export const Transaction = ({ transaction }: TransactionProps) => {
           transaction.transactionType,
           dictionary
         )}
+      </TableCell>
+      <TableCell>
+        {transaction.expiryDate
+          ? formatDateCustom(transaction.expiryDate)
+          : dictionary.NonExpiring}
       </TableCell>
       <TableCell className="text-xs italic">
         {transaction.fileNames.split(",").length > 0

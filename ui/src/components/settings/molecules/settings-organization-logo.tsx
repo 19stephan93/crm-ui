@@ -77,7 +77,7 @@ export const SettingsOrganizationLogo = () => {
                 {dictionary.Cancel}
               </Button>
               <Button onClick={handleUpdate} disabled={logoUpdateIsLoading}>
-                {logoUpdateIsLoading ? <Loader /> : dictionary.Submit}
+                {logoUpdateIsLoading ? <Loader /> : dictionary.Save}
               </Button>
             </>
           )}

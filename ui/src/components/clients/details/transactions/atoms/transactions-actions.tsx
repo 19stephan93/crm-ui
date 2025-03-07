@@ -175,16 +175,16 @@ export const TransactionsActions = ({
         title={dictionary.EditTransaction}
         description={dictionary.EditTransactionDescription}
         component={
-          <TransactionForm form={updateTransactionForm} data={transaction} />
+          <TransactionForm
+            form={updateTransactionForm}
+            data={transaction}
+            isEdit={true}
+          />
         }
         confirmTxt={dictionary.Save}
         cancelTxt={dictionary.Cancel}
         onConfirm={handleEdit}
-        isDisabled={
-          !updateTransactionForm.isValid ||
-          !transactionType ||
-          updateTransactionForm.isPristine
-        }
+        isDisabled={!updateTransactionForm.isValid || !transactionType}
         isLoading={updateIsLoading}
       />
       <Button size={"xs"} variant="ghost" onClick={handleDownload}>

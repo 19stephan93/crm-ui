@@ -291,8 +291,9 @@ export const DocumentsForm = () => {
                   </div>
                 </div>
                 <div className="flex w-full flex-col justify-end gap-2 pt-4">
-                  {checkboxes.map((checkbox) => (
+                  {checkboxes.map((checkbox, index) => (
                     <CheckboxWithText
+                      key={`${checkbox.name}-${index}`}
                       name={checkbox.name}
                       label={checkbox.label}
                       checked={checkbox.value}
@@ -322,7 +323,7 @@ export const DocumentsForm = () => {
             disabled={isLoading || !pdfForm.isValid}
             className="text-xs flex items-center px-8"
           >
-            {isLoading ? <Loader /> : dictionary.Submit}
+            {isLoading ? <Loader /> : dictionary.GenerateDocument}
           </Button>
         </DialogFooter>
       </DialogContent>

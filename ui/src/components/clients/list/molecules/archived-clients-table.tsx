@@ -37,10 +37,8 @@ export const ArchivedClientsTable = () => {
   }, [filterBy]);
 
   useEffect(() => {
-    if (searchValue !== "" || searchValue !== null) {
-      setCurrentPage(0);
-      setShouldRefetch(true);
-    }
+    setCurrentPage(0);
+    setShouldRefetch(true);
   }, [searchValue]);
 
   useEffect(() => {

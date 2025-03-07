@@ -173,7 +173,6 @@ export const PostEmail = async ({
   files.forEach((file) => {
     formData.append("files", file);
   });
-  console.log(body);
   try {
     const response: any = await axios.post(`${MAIL_URL}`, formData, {
       headers: {
